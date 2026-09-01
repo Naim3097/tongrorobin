@@ -286,11 +286,17 @@ h3{font-size:1.12rem;font-weight:700;margin-bottom:.45rem}
 @media (max-width:640px){section{padding:3.25rem 0}.lead{margin-bottom:2rem}}
 
 /* ===== Kegunaan ===== */
-.guna{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.guna article{padding:1.9rem 1.8rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;transition:background .2s ease}
-.guna article:hover{background:var(--cream)}
-.guna article:nth-child(3n){border-right:0}
-.guna article:nth-child(n+4){border-bottom:0}
+.guna{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.guna article{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);
+}
+.guna article:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-dark)}
+.guna figure{margin:0;overflow:hidden;background:var(--cream)}
+.guna img{aspect-ratio:38/25;object-fit:cover;width:100%;transition:transform .5s var(--ease)}
+.guna article:hover img{transform:scale(1.045)}
+.guna .teks{padding:1.4rem 1.5rem 1.6rem}
 .guna h3{display:flex;align-items:baseline;gap:.7rem}
 .guna h3::before{content:"";width:8px;height:8px;background:var(--red);flex-shrink:0;transform:translateY(-2px)}
 .guna p{color:var(--muted);font-size:.94rem;margin-top:.4rem}
@@ -300,18 +306,8 @@ h3{font-size:1.12rem;font-weight:700;margin-bottom:.45rem}
   max-width:52rem;
 }
 .nota-sisa strong{color:var(--ink)}
-@media (max-width:900px){
-  .guna{grid-template-columns:1fr 1fr}
-  .guna article:nth-child(3n){border-right:1px solid var(--line)}
-  .guna article:nth-child(2n){border-right:0}
-  .guna article:nth-child(n+4){border-bottom:1px solid var(--line)}
-  .guna article:nth-child(n+5){border-bottom:0}
-}
-@media (max-width:600px){
-  .guna{grid-template-columns:1fr}
-  .guna article{border-right:0!important;border-bottom:1px solid var(--line)!important}
-  .guna article:last-child{border-bottom:0!important}
-}
+@media (max-width:900px){.guna{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.guna{grid-template-columns:1fr;gap:1.1rem}}
 
 /* ===== Saiz & harga ===== */
 .harga{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;align-items:stretch}
@@ -580,28 +576,46 @@ footer.site .hakcipta{border-top:1px solid #2B2724;padding-top:1.4rem;font-size:
       <p class="lead r" style="--d:.1s">Tak perlu upah lori atau berulang-alik ke pusat pelupusan. Isi sahaja tong sepanjang tempoh sewaan, dan kami angkut semuanya sekali gus. Ini kerja yang paling kerap kami uruskan:</p>
       <div class="guna">
         <article class="r">
-          <h3>Ubah suai rumah</h3>
-          <p>Runtuhan simen, jubin lama, kayu, plaster siling dan pintu tingkap yang dibuang masa renovasi.</p>
+          <figure><img src="images/guna-sisa-ubah-suai-rumah.webp" width="760" height="500" alt="Bilik yang sedang diubah suai dengan timbunan sisa jubin dan plaster di lantai" loading="lazy" decoding="async"></figure>
+          <div class="teks">
+            <h3>Ubah suai rumah</h3>
+            <p>Runtuhan simen, jubin lama, kayu, plaster siling dan pintu tingkap yang dibuang masa renovasi.</p>
+          </div>
         </article>
         <article class="r" style="--d:.06s">
-          <h3>Tapak binaan &amp; perobohan</h3>
-          <p>Konkrit, batu-bata dan sisa kerja tanah. Kontraktor boleh atur tong ikut jadual projek.</p>
+          <figure><img src="images/guna-tapak-binaan-perobohan.webp" width="760" height="500" alt="Pekerja binaan di atas struktur besi tetulang pada tapak pembinaan" loading="lazy" decoding="async"></figure>
+          <div class="teks">
+            <h3>Tapak binaan &amp; perobohan</h3>
+            <p>Konkrit, batu-bata dan sisa kerja tanah. Kontraktor boleh atur tong ikut jadual projek.</p>
+          </div>
         </article>
         <article class="r" style="--d:.12s">
-          <h3>Kilang, gudang &amp; industri</h3>
-          <p>Sisa pengeluaran, palet dan pembungkusan pukal dari premis perindustrian, dengan kutipan berjadual.</p>
+          <figure><img src="images/guna-premis-kilang-gudang.webp" width="760" height="500" alt="Ruang dalaman gudang perindustrian yang luas dan lapang" loading="lazy" decoding="async"></figure>
+          <div class="teks">
+            <h3>Kilang, gudang &amp; industri</h3>
+            <p>Sisa pengeluaran, palet dan pembungkusan pukal dari premis perindustrian, dengan kutipan berjadual.</p>
+          </div>
         </article>
         <article class="r">
-          <h3>Kedai &amp; premis komersial</h3>
-          <p>Sisa ubah suai ruang niaga, kabinet dan perabot lama masa fit-out kedai, pejabat, hotel atau restoran.</p>
+          <figure><img src="images/guna-ubah-suai-premis-komersial.webp" width="760" height="500" alt="Ruang niaga yang sedang dikupas untuk kerja fit-out komersial" loading="lazy" decoding="async"></figure>
+          <div class="teks">
+            <h3>Kedai &amp; premis komersial</h3>
+            <p>Sisa ubah suai ruang niaga, kabinet dan perabot lama masa fit-out kedai, pejabat, hotel atau restoran.</p>
+          </div>
         </article>
         <article class="r" style="--d:.06s">
-          <h3>Landskap &amp; tebangan pokok</h3>
-          <p>Dahan, batang pokok dan sisa kebun selepas kerja landskap atau pembersihan tanah.</p>
+          <figure><img src="images/guna-sisa-landskap-tebangan-pokok.webp" width="760" height="500" alt="Beberapa batang pokok besar yang telah ditebang dan dipotong di atas rumput" loading="lazy" decoding="async"></figure>
+          <div class="teks">
+            <h3>Landskap &amp; tebangan pokok</h3>
+            <p>Dahan, batang pokok dan sisa kebun selepas kerja landskap atau pembersihan tanah.</p>
+          </div>
         </article>
         <article class="r" style="--d:.12s">
-          <h3>Mengosongkan rumah &amp; stor</h3>
-          <p>Perabot, tilam dan barangan pukal sebelum anda pindah, menyewa atau menjual hartanah.</p>
+          <figure><img src="images/guna-perabot-lama-kosongkan-rumah.webp" width="760" height="500" alt="Timbunan perabot lama dan barangan pukal menunggu untuk dilupuskan" loading="lazy" decoding="async"></figure>
+          <div class="teks">
+            <h3>Mengosongkan rumah &amp; stor</h3>
+            <p>Perabot, tilam dan barangan pukal sebelum anda pindah, menyewa atau menjual hartanah.</p>
+          </div>
         </article>
       </div>
       <p class="nota-sisa r"><strong>Perlu diingat:</strong> kami tak terima bahan kimia, bahan mudah terbakar atau sisa berbahaya. Tak pasti dengan sisa anda? <a href="https://wa.me/60133985009?text=Hi%20Saiboss!%20Boleh%20saya%20semak%20sama%20ada%20sisa%20saya%20diterima%3F">Tanya dulu di WhatsApp</a>.</p>
