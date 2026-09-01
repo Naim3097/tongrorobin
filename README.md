@@ -1,63 +1,69 @@
-# Saiboss Enterprise — Landing Page (tongrorobin.com)
+# Saiboss Enterprise — Landing Page
 
-Conversion-focused landing page for Saiboss Enterprise (legal entity Rorobin
-Dengkil Empire, NS0292662-V) — RORO bin rental in Dengkil / Klang Valley.
-Single-page static site, no build step, WhatsApp as the primary conversion
-channel.
+Conversion-focused landing page for RORO bin rental in Dengkil / Klang Valley.
+Single static page, no build step, WhatsApp as the primary conversion channel.
 
 ## Files
 
 | File | Purpose |
 |---|---|
-| `index.html` | Complete landing page (HTML + inline CSS/SVG + ~100 lines of vanilla JS) |
-| `images/` | Saiboss logo, hero bin render (2 widths), lorry cutout, 3 bin photos, 4 real job photos (SEO filenames) |
+| `index.html` | Complete page (HTML + inline CSS + ~150 lines of vanilla JS) |
+| `video/` | Hero service film, trimmed and compressed |
+| `images/` | Logo, hero poster, service and crew photography, 3 bin photos |
 | `robots.txt` | Crawl rules + sitemap pointer |
-| `sitemap.xml` | XML sitemap for Google |
-| `.claude/launch.json` | Local dev preview (`npx serve`) |
+| `sitemap.xml` | XML sitemap |
+| `.claude/launch.json` | Local preview (`npx serve`) |
 
-## Page structure (conversion flow)
+## Page flow
 
-Hero (problem → solution, CTA, bin vector) → animated lorry band → proof strip
-→ use cases (kegunaan) → bin options with size diagrams (saiz & harga) → how it
-works (cara) → why us + real job photos (kenapa) → coverage (kawasan) → FAQ
-(soalan) → enquiry form (tempah). A round floating WhatsApp button appears
-after the hero and hides at the enquiry section.
+Hero (what Saiboss does) → quick quote bar → figures → what we handle →
+delivery moment → sizes and pricing → how it works → why Saiboss + crew and
+credentials → coverage → FAQ → enquiry.
 
-## Key decisions
+## Design notes
 
-- **Brand**: Saiboss Enterprise (logo in header); legal line keeps Rorobin
-  Dengkil Empire (NS0292662-V). Schema `name` Saiboss Enterprise with
-  `alternateName` TongRoroBin for domain continuity.
-- **Malay-first copy**, conversational tone ("dah termasuk", "tak perlu") —
-  matches how the market actually searches and talks. One English line in the
-  footer covers "RORO bin rental Klang Valley".
-- **Hero visual**: branded Saiboss bin render (transparent cutout) served as
-  responsive WebP at 700w/1100w via `srcset`, preloaded as the LCP image.
-  The three pricing cards use the original fleet bin photos.
-- **Scroll-linked lorry**: the fleet cutout drives left to right across its own
-  band as the page scrolls (rAF + transform only; static under
-  `prefers-reduced-motion`).
-- **No em-dashes in body copy**: sentences are punctuated with commas, colons
-  and full stops, which reads as human rather than machine-generated.
-- **WhatsApp everywhere**: hero CTA, per-bin "Tempah Tong Ini" (pre-filled
-  per size), "Tanya Saiz yang Sesuai" photo helper, coverage fallback link,
-  enquiry form that composes a full pre-filled message (size, area, days,
-  waste type). All prefills greet "Hi Saiboss!".
-- **Only supported claims**: registration NS0292662-V, prices from RM245 incl.
-  delivery/collection, 25 areas, 1–7 day rentals, named past projects.
-  Bin volumes (±4/±8/±10 m³) are computed from the stated dimensions.
-- Typography: Archivo (headings) + Inter (body). Red `#C8161D` + yellow
-  `#FFC400` accents; WhatsApp CTAs use accessible green `#15803D`.
+- **Hero is the service film.** 30s original trimmed to 26.5s to drop the logo
+  end-card so it loops cleanly, audio stripped, re-encoded 27MB → 1.75MB.
+  Loads only when in view, skipped entirely under `prefers-reduced-motion` or
+  Save-Data, with the poster frame as the LCP image.
+- **Motion earns its place.** Line-mask reveal on the H1, counters on the
+  figures, parallax on the delivery photo (desktop only), sticky image that
+  follows the active step, interactive size selector. No blanket fade-ups.
+- **Sizes are interactive**, not three repeated cards: tabs drive the photo,
+  a proportional height scale, the spec list and the pre-filled WhatsApp link.
+- Squared corners, hairline rules, real contrast rhythm between near-black and
+  bone sections. No gradient blobs, no glassmorphism, no decorative icons.
+- Brand red `#D01820` with blue `#1B4FD8` drawn from the Saiboss mark.
+
+## Assets
+
+Used: hero film + poster, lorry lowering a bin, driver at the cab, crew beside
+a bin, three bin photos, logo.
+
+Deliberately not used: the truck cutout and crew cutout (both duplicate what
+the film and delivery photo already show better), and the two-crew image (its
+checkerboard was flattened into the pixels, so it has no usable transparency).
+
+**Outstanding:** the three RORO bin assets carrying the Saiboss logo have not
+been supplied. The size selector still shows the older bins branded "RORO BIN",
+which conflicts with Saiboss. Drop the replacements into `images/` as
+`tong-roro-kecil-2x6x12.webp`, `tong-roro-sederhana-4x6x12.webp` and
+`tong-roro-besar-5x6x12.webp` and no markup changes are needed.
 
 ## SEO
 
-- Title/description target "sewa tong roro" + Dengkil/Lembah Klang; canonical,
-  Open Graph, theme-color.
-- JSON-LD: `LocalBusiness` (25 `areaServed`, 3 offers, price range, phone) +
-  `FAQPage` (8 questions, mirrors the visible FAQ).
-- One H1 (keyword + location), semantic H2/H3, descriptive Malay alt text,
-  SEO image filenames, width/height everywhere, below-fold images lazy-loaded.
-- Lighthouse (mobile, throttled): Perf 89 / A11y 100 / BP 100 / SEO 100, CLS 0.
+- Title and description target "sewa tong roro" plus Dengkil / Lembah Klang.
+- JSON-LD: `LocalBusiness` (25 `areaServed`, 3 offers, price range, phone) and
+  `FAQPage` mirroring the visible FAQ.
+- One H1, semantic H2/H3 per section, descriptive Malay alt text throughout.
+- No em-dashes in body copy; sentences use commas, colons and full stops.
+
+## Measured
+
+Lighthouse mobile (throttled): Performance 91, Accessibility 100, Best
+Practices 100, SEO 100. CLS 0.037, TBT 0ms. No horizontal overflow at 390px
+or 1440px. Video playback, size selector, counters and the sticky step image
+all verified in-browser with no console errors.
 
 ## Local preview
 
@@ -67,13 +73,12 @@ npx -y serve -l 8735 .
 
 ## Deploy
 
-1. Upload `index.html`, `robots.txt`, `sitemap.xml` and the `images/` folder to
-   the web root of tongrorobin.com.
+1. Upload `index.html`, `robots.txt`, `sitemap.xml`, `images/` and `video/` to
+   the web root.
 2. Submit `sitemap.xml` in Google Search Console.
 
 ## Recommended next step
 
-Per-area landing pages ("Sewa tong roro Cyberjaya", "…Putrajaya", etc.) — one
-page cannot rank for 25 town searches. This page's structure (H1 pattern,
-schema, coverage groups) is designed to be cloned per area, then each page
-added to `sitemap.xml`.
+Per-area landing pages ("Sewa tong roro Cyberjaya", "…Putrajaya"). One page
+cannot rank for 25 town searches; this page's structure is built to be cloned
+per area and added to `sitemap.xml`.
