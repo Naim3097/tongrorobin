@@ -145,8 +145,8 @@ header.site{
 header.site.solid{background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:74px}
 .brand{display:inline-flex;align-items:center}
-.brand img{height:44px;width:auto;transition:filter .35s var(--ease)}
-header.site:not(.solid) .brand img{filter:brightness(0) invert(1)}
+.brand img{height:48px;width:auto;transition:filter .35s var(--ease)}
+header.site:not(.solid) .brand img{filter:drop-shadow(0 0 9px rgba(255,255,255,.5)) drop-shadow(0 2px 7px rgba(0,0,0,.55))}
 nav.main{display:flex;align-items:center;gap:2rem}
 nav.main a:not(.btn){
   font-size:.9rem;font-weight:500;text-decoration:none;color:#fff;
@@ -223,19 +223,30 @@ nav.main .btn{padding:.72rem 1.25rem;font-size:.9rem}
 }
 .qbar button:hover{background:var(--red-2)}
 @media (max-width:900px){
-  .qbar form{grid-template-columns:1fr 1fr}
+  .qbar form{grid-template-columns:repeat(3,1fr)}
+  .qfield{padding:.95rem 1.1rem}
   .qbar button{grid-column:1/-1;padding:1.15rem;justify-content:center}
 }
-@media (max-width:520px){.qbar form{grid-template-columns:1fr}}
+@media (max-width:600px){.qbar form{grid-template-columns:1fr}}
 
 /* ============ Angka ============ */
 .figures{border-bottom:1px solid var(--line)}
-.figures .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding-top:3.5rem;padding-bottom:3.5rem}
-.fig .n{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2.1rem,4.2vw,3.2rem);letter-spacing:-.04em;line-height:1}
-.fig .n small{font-size:.46em;font-weight:700;margin-right:.12em;vertical-align:.12em}
-.fig p{font-size:.9rem;color:var(--muted);margin-top:.5rem;max-width:18ch}
+.figures .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding-top:3.25rem;padding-bottom:3.25rem}
+.fig{padding:0 2.25rem;border-left:1px solid var(--line)}
+.fig:first-child{padding-left:0;border-left:0}
+.fig:last-child{padding-right:0}
+.fig .n{
+  font-family:'Archivo',sans-serif;font-weight:800;color:var(--ink);
+  font-size:clamp(1.7rem,2.7vw,2.3rem);letter-spacing:-.035em;line-height:1;
+  display:flex;align-items:baseline;gap:.3rem;
+}
+.fig .n .u{font-size:.44em;font-weight:600;color:var(--muted);letter-spacing:-.01em}
+.fig p{font-size:.88rem;color:var(--muted);margin-top:.7rem;max-width:21ch;line-height:1.5}
 @media (max-width:760px){
-  .figures .wrap{grid-template-columns:1fr 1fr;gap:1.75rem 1.5rem;padding-top:2.5rem;padding-bottom:2.5rem}
+  .figures .wrap{grid-template-columns:1fr 1fr;gap:2rem 0;padding-top:2.5rem;padding-bottom:2.5rem}
+  .fig{padding:0 1.35rem}
+  .fig:nth-child(odd){padding-left:0;border-left:0}
+  .fig:nth-child(even){padding-right:0}
 }
 
 /* ============ Seksyen ============ */
@@ -322,13 +333,19 @@ section.dark .eyebrow::before{background:var(--red)}
 .size-tab .dim{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:.85rem;color:var(--muted);margin-top:.3rem;letter-spacing:0}
 .size-tab .pr{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.2rem;color:var(--ink);white-space:nowrap}
 .size-view{position:relative}
-.size-stage{background:var(--bone);padding:2.5rem;display:flex;align-items:center;justify-content:center;min-height:clamp(220px,26vw,330px);overflow:hidden}
-.size-stage img{max-height:clamp(150px,20vw,250px);width:auto;opacity:0;transform:translateY(12px) scale(.98);transition:opacity .5s var(--ease),transform .6s var(--ease-o)}
-.size-stage img.on{opacity:1;transform:none}
-.size-scale{display:flex;align-items:flex-end;gap:1.4rem;height:104px;margin-top:2.25rem;border-bottom:1px solid var(--line)}
-.size-scale .bar{width:52px;background:var(--line);position:relative;transition:background .35s var(--ease)}
+.size-stage{position:relative;background:var(--bone);min-height:clamp(240px,27vw,340px);overflow:hidden}
+.size-stage img{
+  position:absolute;top:50%;left:50%;
+  max-width:calc(100% - 4.5rem);max-height:calc(100% - 4rem);
+  width:auto;height:auto;object-fit:contain;
+  opacity:0;transform:translate(-50%,-50%) translateY(10px);
+  transition:opacity .45s var(--ease),transform .55s var(--ease-o);
+}
+.size-stage img.on{opacity:1;transform:translate(-50%,-50%)}
+.size-scale{display:flex;align-items:flex-end;gap:1.15rem;height:92px;margin:2.25rem 0 3.25rem;border-bottom:1px solid var(--line)}
+.size-scale .bar{width:50px;background:var(--line);position:relative;transition:background .35s var(--ease)}
 .size-scale .bar.on{background:var(--red)}
-.size-scale .bar span{position:absolute;top:-1.5rem;left:0;font-size:.75rem;font-weight:600;color:var(--muted);white-space:nowrap;transition:color .35s var(--ease)}
+.size-scale .bar span{position:absolute;top:calc(100% + .6rem);left:0;font-size:.74rem;font-weight:600;color:var(--muted);white-space:nowrap;transition:color .35s var(--ease)}
 .size-scale .bar.on span{color:var(--ink)}
 .size-meta{margin-top:2rem}
 .size-meta h3{font-size:clamp(1.4rem,2.6vw,2rem);font-weight:800;margin-bottom:.6rem}
@@ -586,10 +603,10 @@ footer.site .base{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;f
   <!-- ANGKA -->
   <div class="figures">
     <div class="wrap">
-      <div class="fig rv"><p class="n"><small>RM</small><span data-count="245">245</span></p><p>Harga bermula, termasuk hantar dan kutip</p></div>
-      <div class="fig rv rv-d1"><p class="n"><span data-count="3">3</span></p><p>Saiz tong, dari ±4 hingga ±10 meter padu</p></div>
-      <div class="fig rv rv-d2"><p class="n"><span data-count="25">25</span></p><p>Kawasan diliputi sekitar Lembah Klang</p></div>
-      <div class="fig rv rv-d3"><p class="n"><span data-count="7">7</span></p><p>Hari maksimum tempoh sewaan</p></div>
+      <div class="fig rv"><p class="n"><span class="u">RM</span><span data-count="245">245</span></p><p>Harga bermula, termasuk hantar dan kutip</p></div>
+      <div class="fig rv rv-d1"><p class="n"><span data-count="3">3</span><span class="u">saiz</span></p><p>Dari ±4 hingga ±10 meter padu</p></div>
+      <div class="fig rv rv-d2"><p class="n"><span data-count="25">25</span><span class="u">kawasan</span></p><p>Sekitar Lembah Klang</p></div>
+      <div class="fig rv rv-d3"><p class="n"><span data-count="7">7</span><span class="u">hari</span></p><p>Tempoh sewaan maksimum</p></div>
     </div>
   </div>
 
