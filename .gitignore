@@ -1,2 +1,5 @@
 # Client audit reports — keep out of the website repo
 *.pdf
+
+# Local verification screenshots
+bin-*.png
