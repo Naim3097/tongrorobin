@@ -25,21 +25,85 @@ credentials → coverage → FAQ → enquiry.
 - **Hero is the service film.** 30s original trimmed to 26.5s to drop the logo
   end-card so it loops cleanly, audio stripped, re-encoded 27MB → 1.75MB.
   Loads only when in view, skipped entirely under `prefers-reduced-motion` or
-  Save-Data, with the poster frame as the LCP image.
+  Save-Data, with the poster frame as the LCP image. The copy block is centred
+  on the film — eyebrow (symmetric red rules), H1, sub and both CTAs all on
+  the page's centre line. Under 560px the eyebrow drops to `.72rem` with
+  narrower rules so `Dengkil · Seluruh Lembah Klang` stays on one line.
 - **Motion earns its place.** Line-mask reveal on the H1, counters on the
-  figures, parallax on the delivery photo (desktop only), sticky image that
-  follows the active step. No blanket fade-ups.
-- **One bin size.** A single spec block (photo, price, spec table, CTA) rather
-  than a size selector. Dimensions and capacity are placeholders pending
-  confirmation; see Outstanding below.
-- Squared corners, hairline rules, real contrast rhythm between near-black and
-  bone sections. No gradient blobs, no glassmorphism, no decorative icons.
-- Brand red `#D01820` with blue `#1B4FD8` drawn from the Saiboss mark.
+  figures, parallax on the delivery banner (desktop only). No blanket fade-ups.
+  The banner sits 8% taller than its frame and is offset `top:-4%` so the
+  ±3% parallax travel never exposes an edge — change one of those three
+  numbers and you must change the others.
+- **Delivery band.** Full-bleed `banner-rorobin.jpg` (2875 × 1080) in a frame
+  sized `clamp(300px,37vw,470px)` to stay near the banner's own 2.66:1, so the
+  lorry is never clipped. Copy is vertically centred and left-aligned on the
+  page margin over a left-to-right scrim; under 760px the frame becomes 5:3
+  anchored right (the lorry sits in the right two-thirds of the banner) and
+  the copy centres on both axes over a flat veil.
+- **How it works is a stepper.** White section, three columns, each with its
+  own photo, a numbered red disc and copy. One red rule runs the full width of
+  the row with the discs sitting on it, each set in from its column edge so a
+  short lead-in tick shows. Everything is visible at once — nothing in the
+  section waits on scroll. Under 900px the columns stack and each card keeps
+  the same photo / rule / disc composition at full width.
+- **One bin size.** A single spec block (technical drawing, price, spec table,
+  CTA) rather than a size selector. Dimensions and capacity are placeholders
+  pending confirmation; see Outstanding below.
+- **Coverage rises out of the skyline.** `background-kl.jpg` sits in a
+  bottom-anchored band (`clamp(300px,42vw,540px)`) on `#kawasan::before`,
+  faded in from the top with a `mask-image` rather than veiled with an opaque
+  white overlay — the page's own white *is* the gradient, so the head sits on
+  pure paper and the Klang Valley skyline with its red highway trail only
+  resolves below the copy. The section carries an oversized
+  `padding-bottom` (`clamp(12rem,22vw,19rem)`) purely to buy that clear band:
+  shrink it and the closing note lands on the buildings. Mask stops are tuned
+  so no text sits above roughly 30% image opacity.
+- **Coverage is a marquee.** Centred head, then Dengkil alone in a dark pill
+  with a pulsing red dot and a `Pangkalan kami` label, a soft fading vertical
+  rule, then the other 24 towns in two hairline-framed rows that scroll
+  forever in opposite directions — top row left-to-right at 38s, bottom
+  right-to-left at 46s, paused on hover. The loop is seamless because each
+  row's track holds the same 12 chips twice and animates exactly `-50%`; the
+  trailing gap lives on `.mq-group`'s `padding-right`, so track width is
+  precisely 2 × group width. Move the gap onto the track and the loop will
+  visibly jump. Edges are softened with a `mask-image` fade rather than a hard
+  cut. Under `prefers-reduced-motion` the animation stops, the duplicate group
+  is hidden and the chips reflow into a centred static cloud.
+- **One margin, no exceptions.** Every block of content sits inside `.wrap`
+  (1240px max, 1.25rem gutter). The quick quote bar under the hero is a white
+  hairline-bordered card on that same margin with the red submit filling the
+  right cell — it used to be a dark full-bleed strip. Only two things go edge
+  to edge, and both are background media with their copy still on the margin:
+  the hero film and the delivery-moment band.
+- Squared corners except where a radius was asked for: the three step photos
+  (10px, 8px small) and the booking form card (12px, 10px small). Hairline
+  rules, real contrast rhythm between near-black and light sections. No
+  gradient blobs, no glassmorphism, no decorative icons.
+- **Booking section.** `red-background.jpg` under a left-to-right dark scrim
+  (94% → 30%) so the white heading, bullets and phone number hold on the dark
+  left while the red glow reads on the right. Under 900px the scrim floor
+  lifts to 72% because the single column puts text across the full width.
+- Brand red `#D01820` with blue `#1B4FD8` drawn from the Saiboss mark. Every
+  WhatsApp affordance — the nav button, the in-page CTAs, the floating action
+  button, the two inline WhatsApp links — is brand red, not WhatsApp green,
+  by request. The `--green` tokens are gone; reverting means reintroducing
+  them and swapping `var(--red)` back in `.btn-wa`, `.wa`, `.area-note a` and
+  `.faq p a`.
 
 ## Assets
 
-Used: hero film + poster, lorry lowering a bin, driver at the cab, crew beside
-a bin, one bin photo, logo.
+Used: hero film + poster, the three step photos (`langkah-1/2/3.jpg`), the two
+crew portraits (`krew-penghantaran.jpg`, `pemandu-hantar-tong.jpg`, both
+1080 × 1350 and shown in matching 4:5 frames so neither is cropped), the
+delivery banner (`banner-rorobin.jpg`), the coverage skyline
+(`background-kl.jpg`), the booking backdrop (`red-background.jpg`), the bin
+dimension drawing, logo.
+
+No longer shown on the page, kept in `images/` for now:
+`krew-saiboss-tong-roro.webp`, `pemandu-lori-saiboss.webp` and
+`tong-roro-saiboss.webp`. `lori-turunkan-tong-roro.webp` no longer appears
+either but is still the `image` value in the LocalBusiness JSON-LD — repoint
+that at the banner or the hero poster if the file is ever removed.
 
 Deliberately not used: the truck cutout and crew cutout (both duplicate what
 the film and delivery photo already show better), and the two-crew image (its
@@ -52,8 +116,21 @@ checkerboard was flattened into the pixels, so it has no usable transparency).
    band, the FAQ answer, the LocalBusiness offer and the bin image alt text.
 2. **Price.** `dari RM245` is carried over from the old lowest tier. Confirm
    it is right for the single bin.
-3. **Bin photo.** `images/tong-roro-saiboss.webp` still shows the older
-   RORO BIN mark. Replace that one file, same name, no markup change.
+3. **Image weight — the biggest thing left to fix.** The newer JPGs are far
+   heavier than the originals: `banner-rorobin.jpg` 1.5MB,
+   `red-background.jpg` 1.4MB, `langkah-3.jpg` 1.1MB, `langkah-2.jpg` 1.0MB,
+   `pemandu-hantar-tong.jpg` 949KB, `krew-penghantaran.jpg` 908KB,
+   `langkah-1.jpg` 778KB, `background-kl.jpg` 439KB and
+   `tong_roro_technical_infographic.jpg` 287KB, against ~30-140KB for the
+   WebP set. That is roughly
+   **8.4MB of images against a 1.75MB hero film**,
+   on a page whose whole point is a fast WhatsApp conversion on mobile data.
+   All of them are lazy-loaded so they do not hold up LCP, but they should be
+   resized to about 1200px on the long edge (1800px for the banner) and
+   re-exported as WebP before launch. Expect ~100-200KB each, so roughly 1.2MB
+   total instead of 8.4MB. Separately, the drawing's small print (the three
+   feature callouts) only reads at desktop width; the numbers that matter are
+   repeated in the spec table.
 4. **Registration number.** The Rorobin Dengkil Empire entity and NS0292662-V
    have been removed throughout. If Saiboss has its own SSM number, send it
    and I will restore the registered-company trust point.
@@ -69,9 +146,14 @@ checkerboard was flattened into the pixels, so it has no usable transparency).
 ## Measured
 
 Lighthouse mobile (throttled): Performance 91, Accessibility 100, Best
-Practices 100, SEO 100. CLS 0.037, TBT 0ms. No horizontal overflow at 390px
-or 1440px. Video playback, size selector, counters and the sticky step image
-all verified in-browser with no console errors.
+Practices 100, SEO 100. CLS 0.037, TBT 0ms. **These predate the JPG swaps —
+re-run Lighthouse after the images are optimised.**
+
+Since then, verified in-browser with no console errors: video playback,
+counters, both WhatsApp forms building correct deep links, the FAQ
+accordions, and — measured element by element against the `.wrap` content
+box at 375, 414, 600, 700, 768, 1024, 1280 and 1600px — nothing outside the
+page margin and `scrollWidth === clientWidth` at every width.
 
 ## Local preview
 
