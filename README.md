@@ -29,8 +29,9 @@ credentials → coverage → FAQ → enquiry.
 - **Motion earns its place.** Line-mask reveal on the H1, counters on the
   figures, parallax on the delivery photo (desktop only), sticky image that
   follows the active step, interactive size selector. No blanket fade-ups.
-- **Sizes are interactive**, not three repeated cards: tabs drive the photo,
-  a proportional height scale, the spec list and the pre-filled WhatsApp link.
+- **One bin size.** A single spec block (photo, price, spec table, CTA) rather
+  than a size selector. Dimensions and capacity are placeholders pending
+  confirmation; see Outstanding below.
 - Squared corners, hairline rules, real contrast rhythm between near-black and
   bone sections. No gradient blobs, no glassmorphism, no decorative icons.
 - Brand red `#D01820` with blue `#1B4FD8` drawn from the Saiboss mark.
@@ -44,11 +45,18 @@ Deliberately not used: the truck cutout and crew cutout (both duplicate what
 the film and delivery photo already show better), and the two-crew image (its
 checkerboard was flattened into the pixels, so it has no usable transparency).
 
-**Outstanding:** the three RORO bin assets carrying the Saiboss logo have not
-been supplied. The size selector still shows the older bins branded "RORO BIN",
-which conflicts with Saiboss. Drop the replacements into `images/` as
-`tong-roro-kecil-2x6x12.webp`, `tong-roro-sederhana-4x6x12.webp` and
-`tong-roro-besar-5x6x12.webp` and no markup changes are needed.
+**Outstanding, needs confirming before launch:**
+
+1. **Bin dimensions and capacity.** Currently placeheld at 4 × 6 × 12 kaki /
+   ±8 meter padu. These appear in five places: the spec table, the figures
+   band, the FAQ answer, the LocalBusiness offer and the bin image alt text.
+2. **Price.**  is carried over from the old lowest tier. Confirm
+   it is right for the single bin.
+3. **Bin photo.**  still shows the older
+   RORO BIN mark. Replace that one file, same name, no markup change.
+4. **Registration number.** The Rorobin Dengkil Empire entity and NS0292662-V
+   have been removed throughout. If Saiboss has its own SSM number, send it
+   and I will restore the registered-company trust point.
 
 ## SEO
 
