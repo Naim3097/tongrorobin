@@ -12,7 +12,8 @@ Single static page, no build step, WhatsApp as the primary conversion channel.
 | `images/` | Logo, hero poster, service and crew photography, bin photo |
 | `robots.txt` | Crawl rules + sitemap pointer |
 | `sitemap.xml` | XML sitemap |
-| `.claude/launch.json` | Local preview (`npx serve`) |
+| `.claude/launch.json` | Local preview configs: PowerShell server (no dependencies) and `npx serve` |
+| `.claude/serve.ps1` | Dependency-free static server for Windows machines without Node |
 
 ## Page flow
 
@@ -117,9 +118,9 @@ checkerboard was flattened into the pixels, so it has no usable transparency).
 2. **Price.** `dari RM245` is carried over from the old lowest tier. Confirm
    it is right for the single bin.
 3. **Image weight — the biggest thing left to fix.** The newer JPGs are far
-   heavier than the originals: `banner-rorobin.jpg` 1.5MB,
+   heavier than the originals: `banner-rorobin.jpg` 1.4MB,
    `red-background.jpg` 1.4MB, `langkah-3.jpg` 1.1MB, `langkah-2.jpg` 1.0MB,
-   `pemandu-hantar-tong.jpg` 949KB, `krew-penghantaran.jpg` 908KB,
+   `krew-penghantaran.jpg` 1.0MB, `pemandu-hantar-tong.jpg` 992KB,
    `langkah-1.jpg` 778KB, `background-kl.jpg` 439KB and
    `tong_roro_technical_infographic.jpg` 287KB, against ~30-140KB for the
    WebP set. That is roughly
@@ -156,6 +157,20 @@ box at 375, 414, 600, 700, 768, 1024, 1280 and 1600px — nothing outside the
 page margin and `scrollWidth === clientWidth` at every width.
 
 ## Local preview
+
+Two configs in `.claude/launch.json`, both on port 8735:
+
+- `tongrorobin-static` — `.claude/serve.ps1`, a static server on .NET
+  `HttpListener`. Needs nothing installed beyond Windows PowerShell 5.1, which
+  is why it is the default: the Node one fails outright on a machine without
+  `npx`, and the machine this page was built on has no Node.
+- `tongrorobin-node` — `npx -y serve`, for machines that have Node.
+
+Direct invocations:
+
+```bash
+powershell -NoProfile -ExecutionPolicy Bypass -File .claude/serve.ps1
+```
 
 ```bash
 npx -y serve -l 8735 .
