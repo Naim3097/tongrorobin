@@ -1,19 +1,58 @@
 # Saiboss Enterprise — Landing Page
 
-Conversion-focused landing page for RORO bin rental in Dengkil / Klang Valley.
-Single static page, no build step, WhatsApp as the primary conversion channel.
+Conversion-focused landing page for RORO bin rental in Dengkil / Klang Valley,
+with WhatsApp as the primary conversion channel. One page, built with Next.js,
+with every word, price and photo editable in Payload CMS at `/admin`.
+
+## Stack
+
+| Part | What |
+|---|---|
+| App | Next.js 16 (App Router) with Payload CMS 3 in the same project |
+| Database | Neon Postgres `tongrorobin-db` (Singapore), via the Vercel Marketplace |
+| Media | Vercel Blob store `tongrorobin-media` (Singapore, public) |
+| Hosting | Vercel project `tongrorobin`, functions in `sin1` |
+
+One database and one Blob store serve production, preview and local
+development alike, so content edited locally is live content.
 
 ## Files
 
-| File | Purpose |
+| Path | Purpose |
 |---|---|
-| `index.html` | Complete page (HTML + inline CSS + ~150 lines of vanilla JS) |
-| `video/` | Hero service film, trimmed and compressed |
-| `images/` | Logo, hero poster, service and crew photography, bin photo |
-| `robots.txt` | Crawl rules + sitemap pointer |
-| `sitemap.xml` | XML sitemap |
-| `.claude/launch.json` | Local preview configs: PowerShell server (no dependencies) and `npx serve` |
-| `.claude/serve.ps1` | Dependency-free static server for Windows machines without Node |
+| `src/app/(frontend)/page.tsx` | The page. Server-rendered from the two globals, prerendered at build |
+| `src/app/(frontend)/site.css` | The page's styles, carried over from the static version |
+| `src/components/SiteScript.tsx` | All behaviour: hero film, reveals, counters, size selector, WhatsApp forms |
+| `src/globals/Homepage.ts` | CMS schema for the page content, one tab per section |
+| `src/globals/SiteSettings.ts` | CMS schema for business details, WhatsApp number and SEO |
+| `src/collections/` | `media` (uploads, stored in Blob) and `users` (admin logins) |
+| `src/lib/site.ts` | Data loading, and everything derived from a bin size's numbers |
+| `src/migrations/` | Database migrations, applied before every build |
+| `src/seed/seed.ts` | Loads the original static content and photography into the CMS |
+| `src/app/robots.ts`, `sitemap.ts` | Generated from the site address in Site Settings |
+| `public/images`, `public/video` | The original assets. Only the seed reads them; the page serves from Blob |
+
+## Editing content
+
+Sign in at `/admin`. **Homepage** holds the page, one tab per section in page
+order; **Site Settings** holds the business name, the WhatsApp number, SEO and
+the footer; **Media** holds photos and the hero film. Saving republishes the
+page.
+
+- The WhatsApp number is entered once, in Site Settings. Every button, both
+  forms and the phone link use it.
+- Bin sizes are entered once, in Homepage → Sizes & Pricing. The size cards
+  (including the to-scale outline, drawn from the height), both form
+  dropdowns, the WhatsApp messages, the LocalBusiness offers and the price
+  range all follow. **Prices and sizes quoted inside sentences do not**: the
+  hero paragraph, the "RM245" figure, the FAQ answers and the meta
+  descriptions are plain text and must be edited by hand.
+- The coverage list likewise feeds the marquee, both area dropdowns and
+  `areaServed`. The "25 kawasan" heading and figure are plain text.
+- In note and FAQ text, `[phrase](wa:message)` links the phrase to WhatsApp
+  with that message pre-filled; `[phrase](https://…)` is an ordinary link.
+- Uploaded images are resized and re-encoded to WebP/AVIF on request, so the
+  heavy PNG originals no longer reach visitors at full weight.
 
 ## Page flow
 
@@ -65,8 +104,8 @@ credentials → coverage → FAQ → enquiry.
   layout under 560px (silhouette, price, name, dims; capacity and hint hidden)
   that still fits 375px with room to spare. The stage sits above the panel
   under 900px. Sizes, capacities and
-  prices live once, in the `SIZES` array in the script; the markup only holds
-  the default (Sederhana) so the page reads correctly without JavaScript.
+  prices live once, in the CMS (Homepage → Sizes & Pricing); the server renders
+  the default size so the page reads correctly without JavaScript.
 - **Coverage rises out of the skyline.** `background-kl.jpg` sits in a
   bottom-anchored band (`clamp(300px,42vw,540px)`) on `#kawasan::before`,
   faded in from the top with a `mask-image` rather than veiled with an opaque
@@ -137,34 +176,22 @@ checkerboard was flattened into the pixels, so it has no usable transparency).
 
 1. **Bin sizes and capacities.** Three tiers: 2 × 6 × 12 kaki (±4 m³),
    4 × 6 × 12 (±8 m³) and 5 × 6 × 12 (±10 m³). Capacities are the box volume
-   converted, not measured. They appear in the `SIZES` array, the tab labels,
-   the two form selects, the FAQ answers (visible and JSON-LD), the
-   LocalBusiness offers and the three drawings' alt text — change them in
-   every place or the page contradicts itself.
+   converted, not measured. Change them in the CMS (Homepage → Sizes &
+   Pricing) and in the FAQ answers, which quote them in plain text.
 2. **Prices.** RM245 / RM350 are the tiers this site published before the
    single-size interlude, restored as-is; RM480 for the large bin is the
    figure given on 17 Sep 2026 (the old site had RM490). None of the three
-   has been confirmed against a current price list. Same places as item 1,
-   plus `priceRange` in the JSON-LD and the "3 saiz dari RM245" meta and OG
-   descriptions.
-3. **Image weight — the biggest thing left to fix.** Six of the photos now
-   ship as PNG, which is the wrong format for photographs and roughly doubles
-   their size: `pemandu-hantar-tong.png` 2.3MB, `langkah-2.png` 2.2MB,
-   `krew-penghantaran.png` 2.2MB, `langkah-3.png` 2.2MB, `langkah-1.png` 1.9MB,
-   `banner-rorobin.png` 1.8MB. Then `red-background.jpg` 1.4MB, the three bin
-   drawings as RGBA PNGs (`tong-sederhana` 1.4MB, `tong-kecil` 1.4MB,
-   `tong-besar` 1.2MB), `background-kl.jpg` 439KB, against ~30-140KB for the
-   original WebP set. That is roughly
-   **18MB of images against a 1.75MB hero film**,
-   on a page whose whole point is a fast WhatsApp conversion on mobile data.
-   All of them are lazy-loaded so they do not hold up LCP, but they should be
-   resized to about 1200px on the long edge (1800px for the banner) and
-   re-exported as WebP before launch. The drawings are flat colour on white
-   and need no alpha, so they compress hardest of all. Expect ~100-200KB each,
-   so roughly 1.5MB total instead of 18MB. The six photo PNGs alone would drop
-   from 12.6MB to about 700KB as JPG at quality 85, with no visible change. Separately, each drawing's small
-   print (the three feature callouts) only reads at desktop width; the numbers
-   that matter are repeated in the spec table.
+   has been confirmed against a current price list. Change them in the
+   same place as item 1, plus the hero paragraph, the first figure, the FAQ
+   answers and the meta and social descriptions in Site Settings.
+3. **Image weight.** The originals in the Media library are still heavy:
+   six photos and three drawings uploaded as 1.2 to 2.3MB PNGs, about 18MB in
+   all. Visitors no longer download them as-is, because the page serves each
+   image resized and re-encoded for the screen asking. Replacing the originals
+   with ~1600px JPG or WebP exports would still make the first request for
+   each size faster and keep Blob storage small. Separately, each drawing's
+   small print (the three feature callouts) only reads at desktop width; the
+   numbers that matter are repeated in the spec table.
 4. **Registration number.** The Rorobin Dengkil Empire entity and NS0292662-V
    have been removed throughout. If Saiboss has its own SSM number, send it
    and I will restore the registered-company trust point.
@@ -180,8 +207,9 @@ checkerboard was flattened into the pixels, so it has no usable transparency).
 ## Measured
 
 Lighthouse mobile (throttled): Performance 91, Accessibility 100, Best
-Practices 100, SEO 100. CLS 0.037, TBT 0ms. **These predate the JPG swaps —
-re-run Lighthouse after the images are optimised.**
+Practices 100, SEO 100. CLS 0.037, TBT 0ms. **These are from the static
+version and predate the move to Next.js and Payload — re-run Lighthouse on
+the deployed site.**
 
 Since then, verified in-browser with no console errors: video playback,
 counters, both WhatsApp forms building correct deep links, the FAQ
@@ -189,31 +217,43 @@ accordions, and — measured element by element against the `.wrap` content
 box at 375, 414, 600, 700, 768, 1024, 1280 and 1600px — nothing outside the
 page margin and `scrollWidth === clientWidth` at every width.
 
-## Local preview
+## Local development
 
-Two configs in `.claude/launch.json`, both on port 8735:
-
-- `tongrorobin-static` — `.claude/serve.ps1`, a static server on .NET
-  `HttpListener`. Needs nothing installed beyond Windows PowerShell 5.1, which
-  is why it is the default: the Node one fails outright on a machine without
-  `npx`, and the machine this page was built on has no Node.
-- `tongrorobin-node` — `npx -y serve`, for machines that have Node.
-
-Direct invocations:
+Needs Node 20+ and pnpm, and access to the Vercel project for the secrets.
 
 ```bash
-powershell -NoProfile -ExecutionPolicy Bypass -File .claude/serve.ps1
+vercel link          # once, to the tongrorobin project
+vercel env pull .env.local
+pnpm install
+pnpm dev             # http://localhost:3000, admin at /admin
 ```
 
+Changing the CMS schema (anything in `src/globals` or `src/collections`):
+
 ```bash
-npx -y serve -l 8735 .
+pnpm generate:types
+pnpm payload migrate:create <name>   # writes a migration to src/migrations
+pnpm migrate                         # applies it
 ```
+
+`pnpm seed` fills an empty CMS from the content in `src/seed/seed.ts`;
+`pnpm seed force` overwrites both globals with it, discarding edits made in
+the admin.
+
+`pnpm migrate` and `pnpm seed` run through `tsx` directly, not `payload run`
+/ `payload migrate`: on Node 22 the Payload CLI was seen to exit 0 without
+doing anything roughly one run in four. If a `pnpm payload …` command prints
+nothing, that is what happened; run it again.
 
 ## Deploy
 
-1. Upload `index.html`, `robots.txt`, `sitemap.xml`, `images/` and `video/` to
-   the web root.
-2. Submit `sitemap.xml` in Google Search Console.
+`vercel deploy` for a preview, `vercel deploy --prod` for production. The
+build command (`vercel.json`) is `pnpm run ci`, which applies pending
+migrations and then builds. Because previews share the production database, a
+preview build of a branch with a new migration migrates the live database.
+
+After the first production deploy, submit `sitemap.xml` in Google Search
+Console.
 
 ## Recommended next step
 

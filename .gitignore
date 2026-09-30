@@ -3,3 +3,22 @@
 
 # Local verification screenshots
 bin-*.png
+
+# Dependencies and build output
+/node_modules
+/.next/
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# Secrets and the Vercel project link
+.env*
+.vercel
+
+# Uploads when running without a Blob token
+/media
+
+# Agent skills installed by `vercel integration add`
+/.agents
+/.claude/skills
+/skills-lock.json

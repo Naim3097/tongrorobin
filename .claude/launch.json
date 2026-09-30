@@ -2,16 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "tongrorobin-static",
-      "runtimeExecutable": "powershell",
-      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ".claude/serve.ps1", "8735"],
-      "port": 8735
-    },
-    {
-      "name": "tongrorobin-node",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["-y", "serve", "-l", "8735", "."],
-      "port": 8735
+      "name": "tongrorobin",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "port": 3000
     }
   ]
 }
