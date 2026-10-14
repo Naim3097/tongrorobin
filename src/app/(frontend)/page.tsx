@@ -38,14 +38,12 @@ export async function generateMetadata(): Promise<Metadata> {
   if (!settings.siteUrl) return {}
 
   const ogImage = asMedia(settings.ogImage)?.url
-  const logo = asMedia(settings.logo)?.url
 
   return {
     metadataBase: new URL(settings.siteUrl),
     title: settings.metaTitle,
     description: settings.metaDescription,
     alternates: { canonical: '/' },
-    icons: logo ? { icon: logo } : undefined,
     openGraph: {
       type: 'website',
       siteName: settings.businessName,
