@@ -83,11 +83,11 @@ export const SiteSettings: GlobalConfig = {
               required: true,
               admin: {
                 description:
-                  'The live address without a trailing slash, e.g. https://tongrorobin.com',
+                  'The live address without a trailing slash, e.g. https://www.tongroromurah.com',
               },
               validate: (value: null | string | undefined) =>
                 /^https?:\/\/[^/]+$/.test(value ?? '') ||
-                'Use a full address without a trailing slash, e.g. https://tongrorobin.com',
+                'Use a full address without a trailing slash, e.g. https://www.tongroromurah.com',
             },
             { name: 'metaTitle', type: 'text', required: true },
             { name: 'metaDescription', type: 'textarea', required: true },

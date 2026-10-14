@@ -640,7 +640,7 @@ export interface SiteSetting {
    */
   defaultWhatsappMessage: string;
   /**
-   * The live address without a trailing slash, e.g. https://tongrorobin.com
+   * The live address without a trailing slash, e.g. https://www.tongroromurah.com
    */
   siteUrl: string;
   metaTitle: string;

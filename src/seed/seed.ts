@@ -100,7 +100,7 @@ await payload.updateGlobal({
     region: 'Selangor',
     whatsappGreeting: 'Hi Saiboss!',
     defaultWhatsappMessage: 'Hi Saiboss! Saya nak sewa tong roro. Boleh bagi sebut harga?',
-    siteUrl: 'https://tongrorobin.com',
+    siteUrl: 'https://www.tongroromurah.com',
     metaTitle: 'Sewa Tong Roro Murah Dengkil & Lembah Klang dari RM245 | Saiboss',
     metaDescription:
       'Sewa tong roro murah di Dengkil, Cyberjaya, Putrajaya & 25 kawasan Lembah Klang. 3 saiz dari RM245 termasuk hantar & kutip. Tempah 5 minit melalui WhatsApp.',
