@@ -101,16 +101,16 @@ await payload.updateGlobal({
     whatsappGreeting: 'Hi Saiboss!',
     defaultWhatsappMessage: 'Hi Saiboss! Saya nak sewa tong roro. Boleh bagi sebut harga?',
     siteUrl: 'https://tongrorobin.com',
-    metaTitle: 'Sewa Tong Roro Dengkil & Lembah Klang dari RM245 | Saiboss Enterprise',
+    metaTitle: 'Sewa Tong Roro Murah Dengkil & Lembah Klang dari RM245 | Saiboss',
     metaDescription:
-      'Sewa tong roro di Dengkil, Cyberjaya, Putrajaya & 25 kawasan Lembah Klang. 3 saiz dari RM245 termasuk hantar & kutip. Tempah 5 minit melalui WhatsApp.',
+      'Sewa tong roro murah di Dengkil, Cyberjaya, Putrajaya & 25 kawasan Lembah Klang. 3 saiz dari RM245 termasuk hantar & kutip. Tempah 5 minit melalui WhatsApp.',
     ogDescription:
-      '3 saiz tong roro dari RM245 termasuk penghantaran & kutipan di 25 kawasan Lembah Klang. Tempahan 5 minit melalui WhatsApp.',
+      'Tong roro murah di Dengkil dan 25 kawasan Lembah Klang. 3 saiz dari RM245 termasuk penghantaran & kutipan. Tempahan 5 minit melalui WhatsApp.',
     ogImage: media.heroPoster,
     schemaDescription:
-      'Perkhidmatan sewa tong roro untuk sisa binaan, sisa ubah suai, sampah industri dan sampah pukal di Dengkil dan sekitar Lembah Klang. Tiga saiz tong dari RM245 termasuk penghantaran dan kutipan.',
+      'Perkhidmatan sewa tong roro murah untuk sisa binaan, sisa ubah suai, sampah industri dan sampah pukal di Dengkil dan sekitar Lembah Klang. Tiga saiz tong dari RM245 termasuk penghantaran dan kutipan.',
     footerDescription:
-      'Perkhidmatan sewa tong roro untuk sisa binaan, sisa ubah suai, sampah industri dan sampah pukal di Dengkil dan sekitar Lembah Klang.',
+      'Perkhidmatan sewa tong roro murah untuk sisa binaan, sisa ubah suai, sampah industri dan sampah pukal di Dengkil dan sekitar Lembah Klang.',
     footerDescriptionEn:
       'RORO bin rental and bulk waste disposal in Klang Valley, Selangor and Kuala Lumpur, Malaysia.',
   },
@@ -122,7 +122,7 @@ await payload.updateGlobal({
   data: {
     hero: {
       tag: 'Dengkil · Seluruh Lembah Klang',
-      heading: 'Sewa tong roro\ndi Lembah Klang.',
+      heading: 'Sewa tong roro murah\ndi Lembah Klang.',
       sub: 'Kami hantar tong ke lokasi anda, anda isi ikut masa anda, kami angkut semuanya. Harga dari RM245 sudah termasuk penghantaran, kutipan dan pelupusan.',
       primaryCta: {
         label: 'Dapatkan Sebut Harga',
@@ -332,6 +332,11 @@ await payload.updateGlobal({
       eyebrow: 'Soalan lazim',
       heading: 'Sebelum anda tempah.',
       items: [
+        {
+          question: 'Ada tong roro murah di Dengkil?',
+          answer:
+            'Ada. Kami beroperasi dari Dengkil, jadi penghantaran ke Dengkil dan kawasan berdekatan seperti Cyberjaya, Putrajaya, Bangi dan Salak Tinggi adalah antara yang paling jimat. Harga bermula RM245 untuk tong kecil dan sudah termasuk penghantaran, kutipan dan pelupusan sisa, tanpa caj tersembunyi.',
+        },
         {
           question: 'Berapa harga sewa tong roro?',
           answer:
